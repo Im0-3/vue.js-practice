@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <nav-link></nav-link>
+    <page-header></page-header>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import NavLink from './components/NavLink'
+import PageHeader from './components/PageHeader'
 
 export default {
   name: 'app',
   components: {
-    'nav-link': NavLink
+    PageHeader
   }
 }
 </script>

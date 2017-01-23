@@ -1,47 +1,34 @@
-const debug = process.env.NODE_ENV !== 'production'
-
 const state = {
-  memos: [{
-    id: 1,
-    title: 'hoge',
-    date: '2000-10-10',
-    tag: [
-        'hoge',
-        'fuga'
-    ]
-  }]
+  keywords: 'cute cat',
+  gifs: []
 }
-
-const util = {
-  // memos の中から id が一致するメモの index を返す
-  findIndex(memos, id) {
-    const targetId = parseInt(id, 10)
-    return memos.findIndex((memo) => {
-          return memo.id === targetId
-        })
-  }
-}
-
 const mutations = {
-  addMemo (newMemo) {
-    newMemo.id = state.memos.reduce((id, memo) => {
-          return id < memo.id ? memo.id : id
-        }, 0) + 1
-    state.memos.push(newMemo)
+  changeKeywords (state, keywords) {
+    state.keywords = keywords
   },
-  removeMemo(id) {
-    // memos の中から id が一致するメモの index を取得する
-    const index = util.findIndex(state.memos, id)
-    state.memos.splice(index, 1)
-  },
-  updateMemo(memo) {
-    // memos の中から id が一致するメモの index を返す
-    const index = util.findIndex(state.memos, memo.id)
-    state.memos.splice(index, 1, memo)
+  changeGifs (state, gifs) {
+    state.gifs = gifs.data
   }
+}
+const actions = {
+  changeKeywords (context, keywords) {
+    context.commit('changeKeywords', {keywords})
+  },
+  search (context, keyword) {
+    const params = encodeURIComponent(keyword).replace(/%20/g, '+');
+    fetch(`http://api.giphy.com/v1/gifs/search?q=${params}&api_key=dc6zaTOxFJmzC`).then((res) => {
+      res.json().then((json) => {
+        context.commit('changeGifs', json)
+      })
+    })
+  }
+}
+const getter = {
 }
 
 export default {
   state,
-  mutations
+  mutations,
+  actions,
+  getter
 }
