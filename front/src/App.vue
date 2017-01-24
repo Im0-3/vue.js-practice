@@ -1,17 +1,19 @@
 <template>
   <div id="app">
-    <page-header></page-header>
-    <router-view></router-view>
+    <global-header></global-header>
+    <div class="container">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
-import PageHeader from './components/PageHeader'
+import GlobalHeader from './components/GlobalHeader'
 
 export default {
   name: 'app',
   components: {
-    PageHeader
+    GlobalHeader
   }
 }
 </script>
@@ -21,4 +23,10 @@ export default {
   margin: 0;
   padding: 0;
 }
+
+  .container {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 20px;
+  }
 </style>

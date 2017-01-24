@@ -1,10 +1,10 @@
 <template>
   <div class="layout-root">
     <div class="layout-root__search">
-      <search :keywords="sharedState.keywords"></search>
+      <search></search>
     </div>
     <div class="layout-root_container">
-      <gif-view :items="sharedState.gifs"></gif-view>
+      <gif-view :items="sharedState.favs"></gif-view>
     </div>
   </div>
 </template>
@@ -18,14 +18,16 @@
         return this.$store.state
       }
     },
-    created () {
-      this.$store.dispatch('search', this.sharedState.keywords)
-    },
     components: {
       Search,
       GifView
     },
     methods: {
+      keywords: {
+        change (value) {
+          this.$store.commit('changeKeywords', value)
+        }
+      },
       changeKeywords (value) {
         this.$store.commit('changeKeywords', value)
       },

@@ -1,7 +1,9 @@
 const state = {
   keywords: 'cute cat',
-  gifs: []
+  gifs: [],
+  favs: []
 }
+
 const mutations = {
   changeKeywords (state, keywords) {
     state.keywords = keywords
@@ -10,6 +12,7 @@ const mutations = {
     state.gifs = gifs.data
   }
 }
+
 const actions = {
   changeKeywords (context, keywords) {
     context.commit('changeKeywords', {keywords})
