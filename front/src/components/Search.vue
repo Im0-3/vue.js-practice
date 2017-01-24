@@ -9,7 +9,7 @@
 
 <script>
   export default {
-    prop: {
+    props: {
       keywords: String
     },
     methods: {
